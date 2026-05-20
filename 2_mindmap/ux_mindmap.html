@@ -1,0 +1,313 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.sr-only{position:absolute;left:-9999px}
+#canvas{overflow:auto;width:100%}
+svg{display:block}
+.nd{cursor:pointer;opacity:1;transition:opacity .15s}
+.nd:hover{opacity:.82}
+</style>
+<h2 class="sr-only">UX评估框架完整思维导图，四层分支，包含权重配置系统</h2>
+<div id="canvas">
+<svg id="mm" width="1400" height="1080" viewBox="0 0 1400 1080" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+
+<line x1="700" y1="540" x2="700" y2="800" stroke="#B4B2A9" stroke-width="0.5" stroke-dasharray="4 3"/>
+<g class="nd" onclick="sendPrompt('上线后评估体系应该包含哪些维度？')">
+<rect x="620" y="800" width="160" height="44" rx="8" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="700" y="819" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#5F5E5A">上线后评估</text>
+<text x="700" y="835" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#888780">待发展 …</text>
+</g>
+
+<rect x="590" y="516" width="220" height="48" rx="10" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>
+<text x="700" y="537" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#444441">UX 评估框架</text>
+<text x="700" y="553" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#5F5E5A">原型阶段 · 三项独立输出</text>
+
+<path d="M590 540 C500 540 500 300 440 300" fill="none" stroke="#534AB7" stroke-width="1.2"/>
+<path d="M590 540 C500 540 500 680 440 680" fill="none" stroke="#534AB7" stroke-width="1.2"/>
+<path d="M810 540 C900 540 900 300 960 300" fill="none" stroke="#1D9E75" stroke-width="1.2"/>
+<path d="M810 540 C900 540 900 680 960 680" fill="none" stroke="#D85A30" stroke-width="1.2"/>
+
+<g class="nd" onclick="sendPrompt('感知与心理测试板块A和板块B的完整权重系统')">
+<rect x="310" y="276" width="130" height="48" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="375" y="297" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#3C3489">感知与心理测试</text>
+<text x="375" y="313" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#534AB7">支柱一</text>
+</g>
+
+<g class="nd" onclick="sendPrompt('行为用户测试的完整指标体系')">
+<rect x="310" y="656" width="130" height="48" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="375" y="677" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#3C3489">行为用户测试</text>
+<text x="375" y="693" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#534AB7">支柱二</text>
+</g>
+
+<g class="nd" onclick="sendPrompt('开发成本评估的具体维度')">
+<rect x="960" y="276" width="130" height="48" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="1025" y="297" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#085041">开发成本评估</text>
+<text x="1025" y="313" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#0F6E56">支柱三</text>
+</g>
+
+<g class="nd" onclick="sendPrompt('权重配置系统如何按项目类型设置？')">
+<rect x="960" y="656" width="130" height="48" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text x="1025" y="677" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#712B13">权重配置系统</text>
+<text x="1025" y="693" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#993C1D">第一层 A vs B</text>
+</g>
+
+<path d="M310 300 C240 300 240 140 190 140" fill="none" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M310 300 C240 300 240 240 190 240" fill="none" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M310 300 C240 300 240 360 190 360" fill="none" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M310 300 C240 300 240 460 190 460" fill="none" stroke="#534AB7" stroke-width="0.8"/>
+
+<g class="nd" onclick="sendPrompt('板块A与板块B的权重如何由项目负责人设置？')">
+<rect x="60" y="116" width="130" height="48" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="125" y="137" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="#3C3489">A vs B 权重分配</text>
+<text x="125" y="153" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#534AB7">负责人按进程设置</text>
+</g>
+
+<g class="nd" onclick="sendPrompt('板块A错误计数的评分规则与严重度权重')">
+<rect x="60" y="216" width="130" height="48" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="125" y="237" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="#3C3489">板块A 错误计数</text>
+<text x="125" y="253" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#534AB7">客观 · 可枚举</text>
+</g>
+
+<g class="nd" onclick="sendPrompt('板块B整体评估的投票机制与门控规则')">
+<rect x="60" y="336" width="130" height="48" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="125" y="357" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="#3C3489">板块B 整体评估</text>
+<text x="125" y="373" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#534AB7">社区投票 · 四等级</text>
+</g>
+
+<g class="nd" onclick="sendPrompt('Nielsen十条在板块A和B中的归属分类')">
+<rect x="60" y="436" width="130" height="48" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="125" y="457" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="#3C3489">Nielsen十条归属</text>
+<text x="125" y="473" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#534AB7">三类分配</text>
+</g>
+
+<path d="M60 140 C20 140 20 80 16 80" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+<path d="M60 140 C20 140 20 196 16 196" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+
+<rect x="16" y="60" width="0" height="0"/>
+<text x="14" y="72" text-anchor="start" font-size="10" fill="#534AB7">早期原型</text>
+<text x="14" y="84" text-anchor="start" font-size="10" fill="#B4B2A9">偏重A（客观问题多）</text>
+<text x="14" y="96" text-anchor="start" font-size="10" fill="#B4B2A9">A:B 建议 70:30</text>
+
+<text x="14" y="182" text-anchor="start" font-size="10" fill="#534AB7">接近发布</text>
+<text x="14" y="194" text-anchor="start" font-size="10" fill="#B4B2A9">提升B（整体质感更重要）</text>
+<text x="14" y="206" text-anchor="start" font-size="10" fill="#B4B2A9">A:B 建议 50:50</text>
+
+<path d="M60 240 C20 240 20 186 14 186" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+<path d="M60 240 C20 240 20 284 14 284" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+<path d="M60 240 C20 240 20 322 14 322" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+
+<text x="14" y="178" text-anchor="start" font-size="10" fill="#534AB7">严重度乘数</text>
+<text x="14" y="190" text-anchor="start" font-size="10" fill="#B4B2A9">×1 表面 ×2 次要 ×4 主要 ×8 灾难</text>
+
+<text x="14" y="274" text-anchor="start" font-size="10" fill="#534AB7">累积触发规则</text>
+<text x="14" y="286" text-anchor="start" font-size="10" fill="#B4B2A9">同流程两个×4 → 全部分数×2</text>
+
+<text x="14" y="312" text-anchor="start" font-size="10" fill="#534AB7">视觉标准（独立于Nielsen）</text>
+<text x="14" y="324" text-anchor="start" font-size="10" fill="#B4B2A9">排版·间距·对比度·颜色数量</text>
+
+<path d="M60 360 C20 360 20 310 14 310" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+<path d="M60 360 C20 360 20 390 14 390" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+<path d="M60 360 C20 360 20 426 14 426" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+
+<text x="14" y="302" text-anchor="start" font-size="10" fill="#534AB7">四个等级</text>
+<text x="14" y="314" text-anchor="start" font-size="10" fill="#B4B2A9">基础 · 合格 · 良好 · 优秀</text>
+
+<text x="14" y="382" text-anchor="start" font-size="10" fill="#534AB7">投票机制</text>
+<text x="14" y="394" text-anchor="start" font-size="10" fill="#B4B2A9">≥3人独立投票 · 取中位数</text>
+<text x="14" y="406" text-anchor="start" font-size="10" fill="#B4B2A9">分歧&gt;2级 → 触发讨论</text>
+
+<text x="14" y="418" text-anchor="start" font-size="10" fill="#534AB7">门控规则</text>
+<text x="14" y="430" text-anchor="start" font-size="10" fill="#B4B2A9">×4或×8违规 → 锁定基础级</text>
+<text x="14" y="442" text-anchor="start" font-size="10" fill="#B4B2A9">不进入B投票</text>
+
+<path d="M60 460 C20 460 20 420 14 420" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+<path d="M60 460 C20 460 20 500 14 500" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+<path d="M60 460 C20 460 20 544 14 544" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+
+<text x="14" y="412" text-anchor="start" font-size="10" fill="#534AB7">仅A：H1·H5·H9</text>
+<text x="14" y="424" text-anchor="start" font-size="10" fill="#B4B2A9">系统反馈·错误预防·错误恢复</text>
+
+<text x="14" y="492" text-anchor="start" font-size="10" fill="#534AB7">仅B：H2·H8</text>
+<text x="14" y="504" text-anchor="start" font-size="10" fill="#B4B2A9">认知匹配·简洁美观</text>
+
+<text x="14" y="536" text-anchor="start" font-size="10" fill="#534AB7">A+B各有条文：H3·H4·H6·H7·H10</text>
+<text x="14" y="548" text-anchor="start" font-size="10" fill="#B4B2A9">控制·一致·回忆·效率·文档</text>
+
+<path d="M310 680 C240 680 240 580 190 580" fill="none" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M310 680 C240 680 240 700 190 700" fill="none" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M310 680 C240 680 240 800 190 800" fill="none" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M310 680 C240 680 240 880 190 880" fill="none" stroke="#534AB7" stroke-width="0.8"/>
+
+<g class="nd" onclick="sendPrompt('任务成功率如何定义和测量？')">
+<rect x="60" y="556" width="130" height="48" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="125" y="577" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="#3C3489">任务成功率</text>
+<text x="125" y="593" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#534AB7">主要指标</text>
+</g>
+
+<g class="nd" onclick="sendPrompt('任务完成时间如何测量和对比？')">
+<rect x="60" y="676" width="130" height="48" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="125" y="697" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="#3C3489">任务完成时间</text>
+<text x="125" y="713" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#534AB7">主要指标</text>
+</g>
+
+<g class="nd" onclick="sendPrompt('点击错误率如何计算？')">
+<rect x="60" y="776" width="130" height="48" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="125" y="797" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="#3C3489">点击错误率</text>
+<text x="125" y="813" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#534AB7">主要指标</text>
+</g>
+
+<g class="nd" onclick="sendPrompt('次要行为指标有哪些？')">
+<rect x="60" y="856" width="130" height="48" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="125" y="877" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="#3C3489">次要指标</text>
+<text x="125" y="893" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#534AB7">回退·首次点击·帮助</text>
+</g>
+
+<path d="M60 580 C20 580 20 532 14 532" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+<path d="M60 580 C20 580 20 596 14 596" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+<text x="14" y="524" text-anchor="start" font-size="10" fill="#534AB7">定义</text>
+<text x="14" y="536" text-anchor="start" font-size="10" fill="#B4B2A9">无辅助完成任务的用户比例</text>
+<text x="14" y="588" text-anchor="start" font-size="10" fill="#534AB7">对比方式</text>
+<text x="14" y="600" text-anchor="start" font-size="10" fill="#B4B2A9">对照基准或版本间对比</text>
+
+<path d="M60 700 C20 700 20 660 14 660" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+<path d="M60 700 C20 700 20 716 14 716" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+<text x="14" y="652" text-anchor="start" font-size="10" fill="#534AB7">测量</text>
+<text x="14" y="664" text-anchor="start" font-size="10" fill="#B4B2A9">任务开始到完成的时长</text>
+<text x="14" y="708" text-anchor="start" font-size="10" fill="#534AB7">测试方式</text>
+<text x="14" y="720" text-anchor="start" font-size="10" fill="#B4B2A9">LLM模拟（早期）/ 真实用户（发布前）</text>
+
+<path d="M60 800 C20 800 20 762 14 762" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+<path d="M60 800 C20 800 20 820 14 820" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+<text x="14" y="754" text-anchor="start" font-size="10" fill="#534AB7">计算</text>
+<text x="14" y="766" text-anchor="start" font-size="10" fill="#B4B2A9">误触·错误路径·表单失败次数</text>
+<text x="14" y="812" text-anchor="start" font-size="10" fill="#534AB7">信号</text>
+<text x="14" y="824" text-anchor="start" font-size="10" fill="#B4B2A9">指向具体的认知混淆点</text>
+
+<path d="M60 880 C20 880 20 848 14 848" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+<path d="M60 880 C20 880 20 904 14 904" fill="none" stroke="#534AB7" stroke-width="0.5"/>
+<text x="14" y="840" text-anchor="start" font-size="10" fill="#534AB7">导航回退率</text>
+<text x="14" y="852" text-anchor="start" font-size="10" fill="#B4B2A9">信息架构混乱的代理信号</text>
+<text x="14" y="896" text-anchor="start" font-size="10" fill="#534AB7">首次点击准确率</text>
+<text x="14" y="908" text-anchor="start" font-size="10" fill="#B4B2A9">强预测整体成功的指标</text>
+
+<path d="M960 300 C1040 300 1040 180 1090 180" fill="none" stroke="#1D9E75" stroke-width="0.8"/>
+<path d="M960 300 C1040 300 1040 300 1090 300" fill="none" stroke="#1D9E75" stroke-width="0.8"/>
+<path d="M960 300 C1040 300 1040 400 1090 400" fill="none" stroke="#1D9E75" stroke-width="0.8"/>
+
+<g class="nd" onclick="sendPrompt('实现复杂度如何量化？')">
+<rect x="1090" y="156" width="120" height="48" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="1150" y="177" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="#085041">实现复杂度</text>
+<text x="1150" y="193" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#0F6E56">工时 · 技术债</text>
+</g>
+
+<g class="nd" onclick="sendPrompt('可维护性如何评估？')">
+<rect x="1090" y="276" width="120" height="48" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="1150" y="297" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="#085041">可维护性预测</text>
+<text x="1150" y="313" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#0F6E56">定制化程度</text>
+</g>
+
+<g class="nd" onclick="sendPrompt('设计与开发成本的权衡逻辑')">
+<rect x="1090" y="376" width="120" height="48" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="1150" y="397" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="#085041">设计与成本权衡</text>
+<text x="1150" y="413" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#0F6E56">协商谈判的基础</text>
+</g>
+
+<path d="M1210 180 C1250 180 1250 136 1260 136" fill="none" stroke="#1D9E75" stroke-width="0.5"/>
+<path d="M1210 180 C1250 180 1250 224 1260 224" fill="none" stroke="#1D9E75" stroke-width="0.5"/>
+<text x="1262" y="128" text-anchor="start" font-size="10" fill="#085041">工时估算</text>
+<text x="1262" y="140" text-anchor="start" font-size="10" fill="#B4B2A9">设计需求转换为开发工时</text>
+<text x="1262" y="216" text-anchor="start" font-size="10" fill="#085041">技术债评估</text>
+<text x="1262" y="228" text-anchor="start" font-size="10" fill="#B4B2A9">组件复杂度与未来维护风险</text>
+
+<path d="M1210 300 C1250 300 1250 268 1260 268" fill="none" stroke="#1D9E75" stroke-width="0.5"/>
+<path d="M1210 300 C1250 300 1250 340 1260 340" fill="none" stroke="#1D9E75" stroke-width="0.5"/>
+<text x="1262" y="260" text-anchor="start" font-size="10" fill="#085041">原型阶段即可预测</text>
+<text x="1262" y="272" text-anchor="start" font-size="10" fill="#B4B2A9">越定制化维护成本越高</text>
+<text x="1262" y="332" text-anchor="start" font-size="10" fill="#085041">8px单位系统</text>
+<text x="1262" y="344" text-anchor="start" font-size="10" fill="#B4B2A9">规范化降低维护成本</text>
+
+<path d="M960 680 C1040 680 1040 560 1090 560" fill="none" stroke="#D85A30" stroke-width="0.8"/>
+<path d="M960 680 C1040 680 1040 680 1090 680" fill="none" stroke="#D85A30" stroke-width="0.8"/>
+<path d="M960 680 C1040 680 1040 800 1090 800" fill="none" stroke="#D85A30" stroke-width="0.8"/>
+<path d="M960 680 C1040 680 1040 900 1090 900" fill="none" stroke="#D85A30" stroke-width="0.8"/>
+
+<g class="nd" onclick="sendPrompt('第一层权重：A与B如何按项目进程分配？')">
+<rect x="1090" y="536" width="130" height="48" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text x="1155" y="557" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="#712B13">第一层权重</text>
+<text x="1155" y="573" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#993C1D">A vs B · 负责人设置</text>
+</g>
+
+<g class="nd" onclick="sendPrompt('第二层权重：Nielsen十条如何按项目类型分配？')">
+<rect x="1090" y="656" width="130" height="48" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text x="1155" y="677" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="#712B13">第二层权重</text>
+<text x="1155" y="693" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#993C1D">十条占比 · 按类型配</text>
+</g>
+
+<g class="nd" onclick="sendPrompt('按用户人群如何影响权重？')">
+<rect x="1090" y="776" width="130" height="48" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text x="1155" y="797" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="#712B13">用户人群维度</text>
+<text x="1155" y="813" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#993C1D">影响各条权重占比</text>
+</g>
+
+<g class="nd" onclick="sendPrompt('按使用场景如何影响权重？')">
+<rect x="1090" y="876" width="130" height="48" rx="6" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text x="1155" y="897" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="#712B13">使用场景维度</text>
+<text x="1155" y="913" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#993C1D">影响各条权重占比</text>
+</g>
+
+<path d="M1220 560 C1260 560 1260 516 1270 516" fill="none" stroke="#D85A30" stroke-width="0.5"/>
+<path d="M1220 560 C1260 560 1260 604 1270 604" fill="none" stroke="#D85A30" stroke-width="0.5"/>
+<text x="1272" y="508" text-anchor="start" font-size="10" fill="#993C1D">早期原型 A:B = 70:30</text>
+<text x="1272" y="520" text-anchor="start" font-size="10" fill="#B4B2A9">客观错误更多，优先清错</text>
+<text x="1272" y="596" text-anchor="start" font-size="10" fill="#993C1D">接近发布 A:B = 50:50</text>
+<text x="1272" y="608" text-anchor="start" font-size="10" fill="#B4B2A9">整体质感与错误同等重要</text>
+
+<path d="M1220 680 C1260 680 1260 636 1270 636" fill="none" stroke="#D85A30" stroke-width="0.5"/>
+<path d="M1220 680 C1260 680 1260 700 1270 700" fill="none" stroke="#D85A30" stroke-width="0.5"/>
+<path d="M1220 680 C1260 680 1260 740 1270 740" fill="none" stroke="#D85A30" stroke-width="0.5"/>
+<path d="M1220 680 C1260 680 1260 780 1270 780" fill="none" stroke="#D85A30" stroke-width="0.5"/>
+<text x="1272" y="628" text-anchor="start" font-size="10" fill="#993C1D">生产力工具预设</text>
+<text x="1272" y="640" text-anchor="start" font-size="10" fill="#B4B2A9">效率·一致·容错权重提高</text>
+<text x="1272" y="692" text-anchor="start" font-size="10" fill="#993C1D">消费者应用预设</text>
+<text x="1272" y="704" text-anchor="start" font-size="10" fill="#B4B2A9">美观·状态可见·可学习性优先</text>
+<text x="1272" y="732" text-anchor="start" font-size="10" fill="#993C1D">医疗/金融预设</text>
+<text x="1272" y="744" text-anchor="start" font-size="10" fill="#B4B2A9">容错·错误预防·信任感最高权重</text>
+<text x="1272" y="772" text-anchor="start" font-size="10" fill="#993C1D">开源工具预设</text>
+<text x="1272" y="784" text-anchor="start" font-size="10" fill="#B4B2A9">文档·可学习性·灵活性优先</text>
+
+<path d="M1220 800 C1260 800 1260 756 1270 756" fill="none" stroke="#D85A30" stroke-width="0.5"/>
+<path d="M1220 800 C1260 800 1260 820 1270 820" fill="none" stroke="#D85A30" stroke-width="0.5"/>
+<path d="M1220 800 C1260 800 1260 860 1270 860" fill="none" stroke="#D85A30" stroke-width="0.5"/>
+<text x="1272" y="748" text-anchor="start" font-size="10" fill="#993C1D">专业用户（开发者/设计师）</text>
+<text x="1272" y="760" text-anchor="start" font-size="10" fill="#B4B2A9">效率·快捷键·灵活性权重升</text>
+<text x="1272" y="812" text-anchor="start" font-size="10" fill="#993C1D">普通消费者</text>
+<text x="1272" y="824" text-anchor="start" font-size="10" fill="#B4B2A9">可学习性·错误恢复·美观权重升</text>
+<text x="1272" y="852" text-anchor="start" font-size="10" fill="#993C1D">高风险用户（医疗/金融）</text>
+<text x="1272" y="864" text-anchor="start" font-size="10" fill="#B4B2A9">容错·信任感·状态可见最高权重</text>
+
+<path d="M1220 900 C1260 900 1260 872 1270 872" fill="none" stroke="#D85A30" stroke-width="0.5"/>
+<path d="M1220 900 C1260 900 1260 916 1270 916" fill="none" stroke="#D85A30" stroke-width="0.5"/>
+<path d="M1220 900 C1260 900 1260 960 1270 960" fill="none" stroke="#D85A30" stroke-width="0.5"/>
+<text x="1272" y="864" text-anchor="start" font-size="10" fill="#993C1D">高频重复任务场景</text>
+<text x="1272" y="876" text-anchor="start" font-size="10" fill="#B4B2A9">效率·快捷操作权重高</text>
+<text x="1272" y="908" text-anchor="start" font-size="10" fill="#993C1D">低频复杂任务场景</text>
+<text x="1272" y="920" text-anchor="start" font-size="10" fill="#B4B2A9">可学习性·文档·帮助权重高</text>
+<text x="1272" y="952" text-anchor="start" font-size="10" fill="#993C1D">紧急或高压场景</text>
+<text x="1272" y="964" text-anchor="start" font-size="10" fill="#B4B2A9">错误预防·容错·状态可见最重要</text>
+
+<text x="20" y="1050" text-anchor="start" font-size="10" fill="#888780">注：三项输出（支柱一分数·支柱二分数·开发成本分数）互相独立，如何权衡由项目负责人根据具体情境决策</text>
+</svg>
+</div>
+<script>
+const svg = document.getElementById('mm');
+const canvas = document.getElementById('canvas');
+canvas.style.overflowX = 'auto';
+canvas.style.overflowY = 'auto';
+canvas.style.maxHeight = '680px';
+svg.style.minWidth = '1400px';
+</script>

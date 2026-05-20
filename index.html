@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manifesto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Crimson+Pro:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0e0e0e;
+  --paper:#f4f0e8;
+  --warm:#c8a87a;
+  --accent:#8b2a2a;
+  --muted:#6b6356;
+  --light:#e8e2d6;
+  --white:#fdfaf5;
+  --shadow:rgba(14,14,14,0.12);
+}
+/* Global styles */
+
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden}
+
+/* ─── LANG SWITCHER ─── */
+.lang-switcher{position:fixed;top:1.5rem;right:1.5rem;z-index:200;display:flex;gap:4px;background:rgba(244,240,232,0.85);backdrop-filter:blur(12px);border:1px solid rgba(14,14,14,0.12);border-radius:24px;padding:4px}
+.lang-btn{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.06em;padding:4px 10px;border:none;background:transparent;color:var(--muted);cursor:pointer;border-radius:20px;transition:all 0.2s}
+.lang-btn.active{background:var(--ink);color:var(--paper)}
+
+/* Toggle comments button - fixed, only visible on page2, matches lang-switcher style */
+.toggle-comments-fixed{display:none}
+
+/* Capsule toggle - mirrors lang-switcher exactly, fixed top-left, page2 only */
+#comments-toggle-capsule{
+  position:fixed;
+  top:1.5rem;
+  left:1.5rem;
+  z-index:250;
+  display:none; /* shown only when page2 is active */
+  gap:4px;
+  background:rgba(244,240,232,0.85);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(14,14,14,0.12);
+  border-radius:24px;
+  padding:4px;
+  align-items:center;
+}
+#comments-toggle-capsule.visible{display:flex}
+.toggle-cap-btn{
+  font-family:'DM Sans',sans-serif;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:0.06em;
+  padding:4px 10px;
+  border:none;
+  background:transparent;
+  color:var(--muted);
+  cursor:pointer;
+  border-radius:20px;
+  transition:all 0.2s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+  height:22px;
+}
+.toggle-cap-btn.active{background:var(--ink);color:var(--paper)}
+.toggle-cap-btn .cap-arrow{font-size:9px;line-height:1}
+
+/* Old page2-toggle-bar: fully removed */
+#page2-toggle-bar{display:none}
+
+/* ─── PAGE 1: MANIFESTO ─── */
+#page1{min-height:100vh;position:relative}
+
+/* Hero */
+.hero{height:100vh;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+.hero-canvas{position:absolute;inset:0;z-index:0}
+.hero-grain{position:absolute;inset:0;z-index:1;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");background-size:200px}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 2rem}
+.manifesto-eyebrow{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem;opacity:0;animation:fadeUp 1s 0.5s forwards}
+.manifesto-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,7rem);font-weight:700;line-height:0.95;letter-spacing:-0.02em;color:var(--ink);margin-bottom:1.5rem;opacity:0;animation:fadeUp 1s 0.8s forwards}
+.manifesto-title em{font-style:italic;color:var(--accent)}
+.manifesto-subtitle{font-family:'Crimson Pro',serif;font-size:1.25rem;font-style:italic;color:var(--muted);opacity:0;animation:fadeUp 1s 1.1s forwards}
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 1s 2s forwards}
+.scroll-hint span{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--muted),transparent);animation:scrollPulse 2s ease-in-out infinite}
+
+/* Article section */
+.article-section{max-width:780px;margin:0 auto;padding:6rem 2rem}
+.visual-thread{display:flex;gap:4rem;align-items:stretch;margin-bottom:6rem}
+.thread-line{width:1px;background:linear-gradient(to bottom,transparent,var(--warm),var(--warm),transparent);flex-shrink:0;margin-top:1.5rem}
+.paragraphs{display:flex;flex-direction:column;gap:3.5rem}
+.para-item{position:relative}
+.para-num{font-family:'Playfair Display',serif;font-size:4rem;font-weight:700;color:var(--light);position:absolute;left:-1rem;top:-1.5rem;line-height:1;z-index:0;user-select:none}
+.para-body{position:relative;z-index:1}
+.para-body h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;letter-spacing:-0.01em;margin-bottom:0.75rem;color:var(--ink)}
+.para-body p{font-family:'Crimson Pro',serif;font-size:1.15rem;line-height:1.85;color:#3a342c}
+
+/* Thread nodes */
+.thread-nodes{display:flex;flex-direction:column;justify-content:space-around;padding:1.5rem 0;flex-shrink:0}
+.thread-node{width:10px;height:10px;border-radius:50%;background:var(--warm);border:2px solid var(--paper);box-shadow:0 0 0 1px var(--warm);position:relative;left:-4.5px}
+
+/* CTA */
+.cta-section{text-align:center;padding:4rem 0 6rem}
+.cta-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem}
+.sign-btn{font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:500;letter-spacing:0.04em;padding:1rem 3rem;background:var(--ink);color:var(--paper);border:none;cursor:pointer;border-radius:2px;transition:all 0.3s;position:relative;overflow:hidden}
+.sign-btn::after{content:'';position:absolute;inset:0;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 0.3s ease}
+.sign-btn:hover::after{transform:scaleX(1)}
+.sign-btn span{position:relative;z-index:1}
+
+/* Signatories */
+.signatories{border-top:1px solid var(--light);padding:4rem 2rem 8rem;background:var(--white)}
+.sig-header{text-align:center;margin-bottom:3rem}
+.sig-header h4{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;font-style:italic;color:var(--muted)}
+.sig-count{font-size:0.85rem;color:var(--muted);margin-top:0.5rem}
+.sig-grid{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:center;max-width:900px;margin:0 auto}
+.sig-item{font-family:'Crimson Pro',serif;font-size:1.05rem;font-style:italic;color:var(--ink);position:relative;padding-left:1rem}
+.sig-item::before{content:'—';position:absolute;left:0;color:var(--warm)}
+.sig-identity{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--warm);margin-left:0.5rem;vertical-align:middle}
+
+/* ─── PAGE 2: IDEAS ─── */
+#page2{display:none;min-height:100vh;background:#f8f5f0;overflow:hidden}
+
+/* Mind map */
+.ideas-container{display:flex;flex-direction:row;height:100vh;width:100%;position:relative}
+.comments-panel{width:448px;background:var(--white);display:flex;flex-direction:column;overflow:hidden;transition:width 0.3s ease;position:relative;flex-shrink:0;box-shadow:4px 0 24px rgba(14,14,14,0.10)}
+.comments-panel.collapsed{width:0;box-shadow:none}
+.comments-header{display:flex;align-items:center;justify-content:flex-end;padding:0 1rem;border-bottom:1px solid var(--light);flex-shrink:0;height:57px}
+.comments-title{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:400;font-style:italic;color:var(--muted);white-space:nowrap}
+.comments-list{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:1rem}
+.mindmap-wrapper{flex:1;position:relative;overflow:hidden}
+.mindmap-controls{position:absolute;bottom:1rem;right:1rem;z-index:10;display:flex;gap:6px}
+.map-btn{width:32px;height:32px;background:var(--white);border:1px solid var(--light);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--ink);transition:all 0.2s}
+.map-btn:hover{background:var(--ink);color:var(--paper)}
+#mindmap-canvas{position:absolute;inset:0;cursor:grab;user-select:none}
+#mindmap-canvas:active{cursor:grabbing}
+
+/* Comments */
+.comment-item{display:flex;gap:10px}
+.comment-avatar{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--white)}
+.comment-body{flex:1;background:var(--paper);border-radius:10px;padding:10px 12px}
+.comment-author{font-size:12px;font-weight:500;margin-bottom:3px}
+.comment-tag{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;margin-left:6px;padding:1px 6px;border-radius:10px;background:var(--light);color:var(--muted)}
+.comment-text{font-family:'Crimson Pro',serif;font-size:0.95rem;line-height:1.6;color:var(--ink)}
+.comment-time{font-size:10px;color:var(--muted);margin-top:4px}
+.comment-input-bar{border-top:1px solid var(--light);background:var(--white);display:flex;align-items:flex-end;padding:0.75rem 1rem;gap:10px;flex-shrink:0}
+.comment-input-bar textarea{flex:1;min-height:24px;max-height:100px;border:1px solid var(--light);background:var(--paper);border-radius:8px;padding:8px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;color:var(--ink);resize:none;word-wrap:break-word;overflow-y:auto;line-height:1.4}
+.comment-input-bar textarea:focus{border-color:var(--warm)}
+.comment-input-bar-avatar{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;font-size:12px;font-weight:500;color:var(--white)}
+.post-btn{font-size:12px;font-weight:500;padding:6px 14px;background:var(--ink);color:var(--paper);border:none;border-radius:16px;cursor:pointer;transition:opacity 0.2s;flex-shrink:0;align-self:flex-end}
+.post-btn:hover{opacity:0.8}
+
+/* ─── OVERLAYS ─── */
+.overlay-bg{display:none;position:fixed;inset:0;z-index:500;background:rgba(14,14,14,0.55);backdrop-filter:blur(4px);align-items:center;justify-content:center}
+.overlay-bg.show{display:flex}
+.overlay-card{background:var(--white);border-radius:16px;width:100%;max-width:480px;padding:2.5rem;position:relative;border:1px solid var(--light);box-shadow:0 24px 80px rgba(14,14,14,0.18);animation:overlayIn 0.3s ease}
+.overlay-close{position:absolute;top:1.25rem;right:1.25rem;width:28px;height:28px;background:var(--light);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--muted);transition:all 0.2s}
+.overlay-close:hover{background:var(--ink);color:var(--paper)}
+.overlay-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;margin-bottom:0.5rem}
+.overlay-sub{font-family:'Crimson Pro',serif;font-size:1rem;font-style:italic;color:var(--muted);margin-bottom:2rem}
+
+/* Sign form */
+.form-group{margin-bottom:1.25rem}
+.form-label{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:block}
+.form-input{width:100%;padding:10px 14px;border:1px solid var(--light);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;background:var(--paper);color:var(--ink);outline:none;transition:border-color 0.2s}
+.form-input:focus{border-color:var(--warm)}
+.identity-group{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.identity-chip{padding:7px 16px;border:1px solid var(--light);border-radius:20px;font-size:13px;cursor:pointer;transition:all 0.2s;background:transparent;color:var(--muted)}
+.identity-chip.selected{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.submit-btn{width:100%;padding:13px;background:var(--accent);color:var(--white);border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.04em;cursor:pointer;margin-top:1.5rem;transition:opacity 0.2s}
+.submit-btn:hover{opacity:0.88}
+
+/* Comment overlay */
+.comment-textarea{width:100%;min-height:100px;padding:12px 14px;border:1px solid var(--light);border-radius:8px;font-family:'Crimson Pro',serif;font-size:1rem;line-height:1.7;background:var(--paper);color:var(--ink);outline:none;resize:none;transition:border-color 0.2s}
+.comment-textarea:focus{border-color:var(--warm)}
+.comment-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.comment-tag-btn{padding:5px 12px;border:1px solid var(--light);border-radius:14px;font-size:12px;cursor:pointer;background:transparent;color:var(--muted);transition:all 0.2s}
+.comment-tag-btn.selected{background:var(--warm);color:var(--ink);border-color:var(--warm)}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scrollPulse{0%,100%{opacity:0.4}50%{opacity:1}}
+@keyframes overlayIn{from{opacity:0;transform:translateY(16px) scale(0.97)}to{opacity:1;transform:none}}
+
+/* Page toggle */
+.page-toggle{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:300;display:flex;gap:4px;background:rgba(14,14,14,0.85);backdrop-filter:blur(12px);border-radius:24px;padding:5px}
+.pg-btn{font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border:none;background:transparent;color:rgba(244,240,232,0.5);cursor:pointer;border-radius:18px;transition:all 0.2s}
+.pg-btn.active{background:var(--paper);color:var(--ink)}
+
+/* Mind map SVG */
+#mm-svg text{font-family:'DM Sans',sans-serif;fill:var(--ink);font-size:13px}
+</style>
+</head>
+<body>
+
+<!-- Lang Switcher (always visible) -->
+<div class="lang-switcher">
+  <button class="lang-btn active" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('zh')">中文</button>
+  <button class="lang-btn" onclick="setLang('fr')">FR</button>
+</div>
+
+<!-- Page 1: Manifesto -->
+<div id="page1">
+  <div class="hero">
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+    <div class="hero-grain"></div>
+    <div class="hero-content">
+      <div class="manifesto-eyebrow" data-i18n="eyebrow">Open Experience Manifesto</div>
+      <h1 class="manifesto-title" data-i18n="title">We <em>Believe</em><br>in Open<br>Futures</h1>
+      <p class="manifesto-subtitle" data-i18n="subtitle">Version 0.0 — An invitation to co-create</p>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+
+  <div class="article-section">
+    <div class="visual-thread">
+      <div style="position:relative;display:flex">
+        <div class="thread-nodes">
+          <div class="thread-node"></div>
+          <div class="thread-node"></div>
+          <div class="thread-node"></div>
+          <div class="thread-node"></div>
+        </div>
+        <div class="thread-line"></div>
+      </div>
+      <div class="paragraphs">
+        <div class="para-item">
+          <div class="para-num">01</div>
+          <div class="para-body">
+            <h3 data-i18n="p1h">The problem we are facing</h3>
+            <p data-i18n="p1">End-user open source software, as a user-centred product, was supposed to be open to the user. However, since the way developers work and code donating mechanism, it inherits the unintentionally centralized technology authority of the open source community, which stays very developer-centered and lets actual users remain structurally excluded from the processes.</p>
+          </div>
+        </div>
+        <div class="para-item">
+          <div class="para-num">02</div>
+          <div class="para-body">
+            <h3 data-i18n="p2h">Why is UX still not treated as a first-class problem to be governed</h3>
+            <p data-i18n="p2">UX issues rarely appear as clear failures. Instead, they build up as small frictions, extra effort, and decision fatigue over time. These are hard to notice and even harder to compare. So UX feedback often comes from very different personal perspectives, which makes it difficult to align or prioritize in the open source.</p>
+          </div>
+        </div>
+        <div class="para-item">
+          <div class="para-num">03</div>
+          <div class="para-body">
+            <h3 data-i18n="p3h">Our Values and Mission</h3>
+            <p data-i18n="p3">We are not satisfied with merely granting users the right to run, copy, distribute, study, and modify software. We strive to ensure that users also enjoy the freedom of using software effectively, regardless of one's technical knowledge or expertise. We call for a new collaboration among developers and designers and users themselves so that different roles can meaningfully cooperate and negotiate. Every step we take is aimed at reducing the cost of use and narrowing the distance between technology and the people who rely on it.</p>
+          </div>
+        </div>
+        <div class="para-item">
+          <div class="para-num">04</div>
+          <div class="para-body">
+            <h3 data-i18n="p4h">Our Aim</h3>
+            <p data-i18n="p4">We are here to propose building a platform that strengthens the role of users in open source, enabling UX decisions to be discussed, compared, and negotiated, forming an auditable chain of evidence that can be traced and reviewed and easily translate users' feedback into concrete, actionable directions for change.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <p class="cta-label" data-i18n="ctaLabel">Add your name to this declaration</p>
+      <button class="sign-btn" onclick="openSign()"><span data-i18n="ctaBtn">✦ Sign the Manifesto</span></button>
+    </div>
+  </div>
+
+  <div class="signatories" id="signatories">
+    <div class="sig-header">
+      <h4 data-i18n="sigTitle">Those who have signed</h4>
+      <p class="sig-count" id="sigCount">47 signatories</p>
+    </div>
+    <div class="sig-grid" id="sigGrid"></div>
+  </div>
+</div>
+
+<!-- Page 2: Ideas -->
+<!-- Comments toggle capsule: fixed top-left, lang-switcher style, only on page2 -->
+<div id="comments-toggle-capsule">
+  <button class="toggle-cap-btn active" id="toggleCapBtn" onclick="toggleComments()">
+    <span class="cap-arrow" id="capArrow">◀</span>
+  </button>
+</div>
+
+<!-- Page 2: Ideas -->
+<div id="page2">
+  <div class="ideas-container">
+
+    <div class="comments-panel" id="commentsPanel">
+      <div class="comments-header">
+        <span class="comments-title" data-i18n="commentsTitle">Community Reflections</span>
+      </div>
+      <div id="commentsList" class="comments-list"></div>
+      <div class="comment-input-bar">
+        <div class="comment-input-bar-avatar" style="background:#8b6a4a">You</div>
+        <textarea id="quickComment" placeholder="Share a thought on this idea..." onkeydown="handleCommentKeydown(event)" oninput="autoResizeTextarea(this)"></textarea>
+        <button class="post-btn" id="postBtn" onclick="openCommentOverlay()">Post</button>
+      </div>
+    </div>
+
+    <div class="mindmap-wrapper">
+      <svg id="mm-svg" width="100%" height="100%" style="position:absolute;inset:0"></svg>
+      <div class="mindmap-controls">
+        <button class="map-btn" onclick="mmZoom(1.2)" title="Zoom in">+</button>
+        <button class="map-btn" onclick="mmZoom(0.8)" title="Zoom out">−</button>
+        <button class="map-btn" onclick="mmReset()" title="Reset">⊙</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay 3: Sign Manifesto -->
+<div class="overlay-bg" id="signOverlay">
+  <div class="overlay-card">
+    <button class="overlay-close" onclick="closeSign()">✕</button>
+    <div class="overlay-title" data-i18n="signTitle">Sign the Manifesto</div>
+    <div class="overlay-sub" data-i18n="signSub">Add your voice to this declaration</div>
+    <div class="form-group">
+      <label class="form-label" data-i18n="nameLabel">Your Name</label>
+      <input class="form-input" id="signName" type="text" placeholder="e.g. Yuki Tanaka">
+    </div>
+    <div class="form-group">
+      <label class="form-label" data-i18n="emailLabel">Email (optional)</label>
+      <input class="form-input" id="signEmail" type="email" placeholder="you@example.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label" data-i18n="identityLabel">I am a</label>
+      <div class="identity-group" id="identityGroup">
+        <button class="identity-chip" onclick="toggleIdentity(this,'developer')" data-i18n-chip="developer">Developer</button>
+        <button class="identity-chip" onclick="toggleIdentity(this,'designer')" data-i18n-chip="designer">Designer</button>
+        <button class="identity-chip" onclick="toggleIdentity(this,'user')" data-i18n-chip="user">User</button>
+        <button class="identity-chip" onclick="toggleIdentity(this,'researcher')" data-i18n-chip="researcher">Researcher</button>
+        <button class="identity-chip" onclick="toggleIdentity(this,'other')" data-i18n-chip="other">Other</button>
+      </div>
+    </div>
+    <button class="submit-btn" onclick="submitSign()" data-i18n="submitSign">Sign & Join the Movement →</button>
+  </div>
+</div>
+
+<!-- Overlay 4: Post Comment -->
+<div class="overlay-bg" id="commentOverlay">
+  <div class="overlay-card">
+    <button class="overlay-close" onclick="closeComment()">✕</button>
+    <div class="overlay-title" data-i18n="commentTitle">Share Your Thoughts</div>
+    <div class="overlay-sub" data-i18n="commentSub">Reflect on this idea openly</div>
+    <textarea class="comment-textarea" id="commentText" placeholder="What do you think about this idea? Any connections, critiques, or extensions?"></textarea>
+    <div class="comment-tags">
+      <button class="comment-tag-btn" onclick="toggleTag(this,'insight')" data-tag-type="insight" data-i18n-tag="insight">Insight</button>
+      <button class="comment-tag-btn" onclick="toggleTag(this,'question')" data-tag-type="question" data-i18n-tag="question">Question</button>
+      <button class="comment-tag-btn" onclick="toggleTag(this,'critique')" data-tag-type="critique" data-i18n-tag="critique">Critique</button>
+      <button class="comment-tag-btn" onclick="toggleTag(this,'connection')" data-tag-type="connection" data-i18n-tag="connection">Connection</button>
+    </div>
+    <button class="submit-btn" onclick="submitComment()" data-i18n="submitComment">Post Comment →</button>
+  </div>
+</div>
+
+<!-- Page toggle -->
+<div class="page-toggle">
+  <button class="pg-btn active" onclick="showPage(1)" data-i18n="pageBtn1">Manifesto</button>
+  <button class="pg-btn" onclick="showPage(2)" data-i18n="pageBtn2">0.0 Version</button>
+</div>
+
+<script>
+// ─── i18n ───
+const i18n = {
+  zh:{eyebrow:'开放体验宣言',title:'我们<em>相信</em><br>开放的<br>未来',subtitle:'Version 0.0 — 一份共同创作的邀请',p1h:'我们面临的问题',p1:'最终用户的开源软件作为一个以用户为中心的产品，本应对用户保持开放。然而，由于开发者的工作方式和代码捐献机制，它继承了开源社区中无意中产生的集中式技术权力结构，这种结构仍然以开发者为中心，让真正的用户在结构上被排除在过程之外。',p2h:'为什么用户体验仍然不被视为一个需要管理的问题',p2:'用户体验问题很少表现为明显的失败。相反，它们随着时间累积成小的摩擦、额外的努力和决策疲劳。这些问题很难被注意到，更难被比较。因此，用户体验反馈往往来自非常不同的个人角度，这使得在开源中难以对齐或优先排序。',p3h:'我们的价值观和使命',p3:'我们不满足于仅仅赋予用户运行、复制、分发、研究和修改软件的权利。我们努力确保用户也享受有效使用软件的自由，无论其技术知识或专业知识如何。我们呼吁开发者、设计师和用户之间建立新的合作，使不同角色能够有意义地合作和协商。我们采取的每一步都旨在降低使用成本，缩小技术与依赖它的人之间的距离。',p4h:'我们的目标',p4:'我们在这里提议建立一个平台，加强用户在开源中的作用，使用户体验决策能够被讨论、比较和协商，形成可追溯和审查的可审计证据链，并轻松将用户反馈转化为具体、可行的改变方向。',ctaLabel:'在这份宣言上留下你的名字',ctaBtn:'✦ 签署宣言',sigTitle:'已签署者',commentsTitle:'社区讨论',signTitle:'签署宣言',signSub:'将你的声音加入这份宣言',nameLabel:'你的名字',emailLabel:'邮件（选填）',identityLabel:'我是',submitSign:'签署并加入 →',commentTitle:'分享你的想法',commentSub:'请开放地讨论这个想法',submitComment:'发布评论 →',commentPlaceholder:'分享你对这个想法的看法...',postBtn:'发布',pageBtn1:'宣言',pageBtn2:'0.0版本',developer:'开发者',designer:'设计师',user:'用户',researcher:'研究员',other:'其他',member:'成员',insight:'洞察',question:'疑问',critique:'批评',connection:'联系'},
+  en:{eyebrow:'Open Experience Manifesto',title:'We <em>Believe</em><br>in Open<br>Futures',subtitle:'Version 0.0 — An invitation to co-create',p1h:'The problem we are facing',p1:'End-user open source software, as a user-centred product, was supposed to be open to the user. However, since the way developers work and code donating mechanism, it inherits the unintentionally centralized technology authority of the open source community, which stays very developer-centered and lets actual users remain structurally excluded from the processes.',p2h:'Why is UX still not treated as a first-class problem to be governed',p2:'UX issues rarely appear as clear failures. Instead, they build up as small frictions, extra effort, and decision fatigue over time. These are hard to notice and even harder to compare. So UX feedback often comes from very different personal perspectives, which makes it difficult to align or prioritize in the open source.',p3h:'Our Values and Mission',p3:'We are not satisfied with merely granting users the right to run, copy, distribute, study, and modify software. We strive to ensure that users also enjoy the freedom of using software effectively, regardless of one\'s technical knowledge or expertise. We call for a new collaboration among developers and designers and users themselves so that different roles can meaningfully cooperate and negotiate. Every step we take is aimed at reducing the cost of use and narrowing the distance between technology and the people who rely on it.',p4h:'Our Aim',p4:'We are here to propose building a platform that strengthens the role of users in open source, enabling UX decisions to be discussed, compared, and negotiated, forming an auditable chain of evidence that can be traced and reviewed and easily translate users\' feedback into concrete, actionable directions for change.',ctaLabel:'Add your name to this declaration',ctaBtn:'✦ Sign the Manifesto',sigTitle:'Those who have signed',commentsTitle:'Community Reflections',signTitle:'Sign the Manifesto',signSub:'Add your voice to this declaration',nameLabel:'Your Name',emailLabel:'Email (optional)',identityLabel:'I am a',submitSign:'Sign & Join the Movement →',commentTitle:'Share Your Thoughts',commentSub:'Reflect on this idea openly',submitComment:'Post Comment →',commentPlaceholder:'Share a thought on this idea...',postBtn:'Post',pageBtn1:'Manifesto',pageBtn2:'0.0 Version',developer:'Developer',designer:'Designer',user:'User',researcher:'Researcher',other:'Other',member:'Member',insight:'Insight',question:'Question',critique:'Critique',connection:'Connection'},
+  fr:{eyebrow:'Manifeste de l\'expérience ouverte',title:'Nous <em>croyons</em><br>aux futurs<br>ouverts',subtitle:'Version 0.0 — Une invitation à co-créer',p1h:'Le problème auquel nous sommes confrontés',p1:'Les logiciels open source pour utilisateurs finaux, en tant que produits centrés sur l\'utilisateur, étaient censés être ouverts à l\'utilisateur. Cependant, en raison de la manière dont les développeurs travaillent et du mécanisme de don de code, ils héritent de l\'autorité technologique involontairement centralisée de la communauté open source, qui reste très centrée sur les développeurs et laisse les véritables utilisateurs structurellement exclus des processus.',p2h:'Pourquoi l\'expérience utilisateur n\'est-elle pas traitée comme un problème de première classe à gouverner',p2:'Les problèmes d\'expérience utilisateur n\'apparaissent rarement comme des défaillances claires. Au lieu de cela, ils s\'accumulent comme de petites frictions, des efforts supplémentaires et une fatigue décisionnelle au fil du temps. Ces problèmes sont difficiles à remarquer et encore plus difficiles à comparer. Les retours d\'expérience utilisateur proviennent souvent de perspectives personnelles très différentes, ce qui rend difficile l\'alignement ou la priorisation dans l\'open source.',p3h:'Nos valeurs et notre mission',p3:'Nous ne sommes pas satisfaits de simplement accorder aux utilisateurs le droit d\'exécuter, de copier, de distribuer, d\'étudier et de modifier le logiciel. Nous nous efforçons de garantir que les utilisateurs jouissent également de la liberté d\'utiliser le logiciel efficacement, indépendamment de leurs connaissances ou expertise techniques. Nous appelons à une nouvelle collaboration entre les développeurs, les concepteurs et les utilisateurs eux-mêmes, afin que les différents rôles puissent coopérer et négocier de manière significative. Chaque étape que nous prenons vise à réduire le coût d\'utilisation et à réduire la distance entre la technologie et les personnes qui en dépendent.',p4h:'Notre objectif',p4:'Nous sommes ici pour proposer de construire une plateforme qui renforce le rôle des utilisateurs dans l\'open source, permettant aux décisions d\'expérience utilisateur d\'être discutées, comparées et négociées, formant une chaîne de preuves auditable qui peut être tracée et révisée et traduire facilement les retours des utilisateurs en directions de changement concrètes et réalisables.',ctaLabel:'Ajoutez votre nom à cette déclaration',ctaBtn:'✦ Signer le Manifeste',sigTitle:'Ceux qui ont signé',commentsTitle:'Réflexions de la communauté',signTitle:'Signer le Manifeste',signSub:'Ajoutez votre voix',nameLabel:'Votre nom',emailLabel:'Email (optionnel)',identityLabel:'Je suis',submitSign:'Signer & Rejoindre →',commentTitle:'Partager vos réflexions',commentSub:'Réfléchissez ouvertement',submitComment:'Publier →',commentPlaceholder:'Partagez une réflexion sur cette idée...',postBtn:'Publier',pageBtn1:'Manifeste',pageBtn2:'Version 0.0',developer:'Développeur',designer:'Designer',user:'Utilisateur',researcher:'Chercheur',other:'Autre',member:'Membre',insight:'Perspicacité',question:'Question',critique:'Critique',connection:'Connexion'}
+};
+let currentLang='en';
+
+function setLang(lang){
+  currentLang=lang;
+  // Update language button states
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    const btnLang=b.textContent.toLowerCase();
+    const isActive=(btnLang==='en'&&lang==='en')||(btnLang==='中文'&&lang==='zh')||(btnLang==='fr'&&lang==='fr');
+    b.classList.toggle('active',isActive);
+  });
+  const t=i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.dataset.i18n;
+    if(t[k])el.innerHTML=t[k];
+  });
+  // Update identity chips
+  document.querySelectorAll('[data-i18n-chip]').forEach(chip=>{
+    const k=chip.dataset.i18nChip;
+    if(t[k])chip.textContent=t[k];
+  });
+  // Update comment tag buttons
+  document.querySelectorAll('[data-i18n-tag]').forEach(btn=>{
+    const k=btn.dataset.i18nTag;
+    if(t[k])btn.textContent=t[k];
+  });
+  // Update comment input placeholder and post button
+  const quickComment=document.getElementById('quickComment');
+  if(quickComment && t['commentPlaceholder']) quickComment.placeholder=t['commentPlaceholder'];
+  const postBtn=document.getElementById('postBtn');
+  if(postBtn && t['postBtn']) postBtn.textContent=t['postBtn'];
+  // Update mindmap with new language
+  updateMindmapLabels();
+}
+
+// ─── PAGE SWITCH ───
+function showPage(n){
+  document.getElementById('page1').style.display=n===1?'block':'none';
+  document.getElementById('page2').style.display=n===2?'block':'none';
+  document.querySelectorAll('.pg-btn').forEach((b,i)=>b.classList.toggle('active',i===n-1));
+  // Show capsule toggle only on page 2
+  const capsule=document.getElementById('comments-toggle-capsule');
+  capsule.classList.toggle('visible', n===2);
+  if(n===2){
+    requestAnimationFrame(()=>{
+      initMindmap();
+      resizeMindmapCanvas();
+    });
+  }
+}
+
+function toggleComments(){
+  const panel=document.getElementById('commentsPanel');
+  const btn=document.getElementById('toggleCapBtn');
+  const arrow=document.getElementById('capArrow');
+  const isOpen=!panel.classList.contains('collapsed');
+
+  if(isOpen){
+    panel.classList.add('collapsed');
+    btn.classList.remove('active');
+    arrow.textContent='▶';
+  } else {
+    panel.classList.remove('collapsed');
+    btn.classList.add('active');
+    arrow.textContent='◀';
+  }
+  recenterMindmapInstant();
+}
+
+// ─── HERO CANVAS ───
+const canvas=document.getElementById('heroCanvas');
+const ctx=canvas.getContext('2d');
+let particles=[];
+let animFrame;
+
+function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;initParticles()}
+function initParticles(){
+  particles=[];
+  const n=Math.floor((canvas.width*canvas.height)/18000);
+  for(let i=0;i<n;i++){
+    particles.push({
+      x:Math.random()*canvas.width,y:Math.random()*canvas.height,
+      vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,
+      r:Math.random()*1.5+0.5,
+      a:Math.random()*0.4+0.1,
+      phase:Math.random()*Math.PI*2
+    });
+  }
+}
+
+function drawHero(t){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  // Gradient wash
+  const grad=ctx.createRadialGradient(canvas.width*0.5,canvas.height*0.4,0,canvas.width*0.5,canvas.height*0.4,canvas.width*0.7);
+  grad.addColorStop(0,'rgba(200,168,122,0.08)');
+  grad.addColorStop(0.5,'rgba(139,42,42,0.03)');
+  grad.addColorStop(1,'rgba(244,240,232,0)');
+  ctx.fillStyle=grad;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  // Flowing lines
+  ctx.lineWidth=0.5;
+  for(let i=0;i<4;i++){
+    ctx.beginPath();
+    const y0=canvas.height*(0.3+i*0.12)+Math.sin(t*0.0004+i)*30;
+    ctx.moveTo(0,y0);
+    for(let x=0;x<canvas.width;x+=4){
+      const y=y0+Math.sin(x*0.006+t*0.001+i*1.2)*18+Math.sin(x*0.003+t*0.0007)*10;
+      ctx.lineTo(x,y);
+    }
+    ctx.strokeStyle=`rgba(200,168,122,${0.06-i*0.01})`;
+    ctx.stroke();
+  }
+
+  // Particles
+  particles.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0||p.x>canvas.width)p.vx*=-1;
+    if(p.y<0||p.y>canvas.height)p.vy*=-1;
+    const pulse=Math.sin(t*0.001+p.phase)*0.3+0.7;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(200,168,122,${p.a*pulse})`;
+    ctx.fill();
+  });
+
+  // Connections
+  ctx.lineWidth=0.3;
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<100){
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x,particles[i].y);
+        ctx.lineTo(particles[j].x,particles[j].y);
+        ctx.strokeStyle=`rgba(200,168,122,${0.08*(1-d/100)})`;
+        ctx.stroke();
+      }
+    }
+  }
+  animFrame=requestAnimationFrame(t=>drawHero(t));
+}
+
+window.addEventListener('resize',resizeCanvas);
+resizeCanvas();
+requestAnimationFrame(t=>drawHero(t));
+
+// ─── SIGNATORIES ───
+const initialSigs=[
+  {name:'林美玲',identity:'designer'},{name:'Marcus Webb',identity:'developer'},
+  {name:'田中悠',identity:'user'},{name:'Sofia Martínez',identity:'researcher'},
+  {name:'陈建国',identity:'developer'},{name:'Léa Dupont',identity:'designer'},
+  {name:'김민준',identity:'user'},{name:'Ravi Sharma',identity:'developer'},
+  {name:'王芳',identity:'designer'},{name:'Ivan Petrov',identity:'researcher'},
+  {name:'Amara Diallo',identity:'user'},{name:'张明',identity:'developer'},
+  {name:'Björn Larsson',identity:'other'},{name:'Fatima Al-Hassan',identity:'designer'},
+  {name:'Lucas Oliveira',identity:'user'}
+];
+
+function renderSigs(){
+  const grid=document.getElementById('sigGrid');
+  const count=document.getElementById('sigCount');
+  grid.innerHTML='';
+  signatories.forEach(s=>{
+    const el=document.createElement('div');
+    el.className='sig-item';
+    const identities=s.identity.split('/').map(id=>i18n[currentLang][id.toLowerCase()]||id).join('/');
+    el.innerHTML=`${s.name}<span class="sig-identity">${identities}</span>`;
+    grid.appendChild(el);
+  });
+  count.textContent=`${signatories.length} signatories`;
+}
+
+let signatories=[...initialSigs];
+renderSigs();
+
+// ─── SIGN OVERLAY ───
+let selectedIdentities=[];
+function openSign(){document.getElementById('signOverlay').classList.add('show')}
+function closeSign(){document.getElementById('signOverlay').classList.remove('show')}
+function toggleIdentity(el,id){
+  el.classList.toggle('selected');
+  if(selectedIdentities.includes(id))selectedIdentities=selectedIdentities.filter(x=>x!==id);
+  else selectedIdentities.push(id);
+}
+function submitSign(){
+  const name=document.getElementById('signName').value.trim();
+  if(!name){document.getElementById('signName').focus();return;}
+  signatories.push({name,identity:selectedIdentities.join('/')||'other'});
+  renderSigs();
+  closeSign();
+  document.getElementById('signName').value='';
+  document.getElementById('signEmail').value='';
+  document.querySelectorAll('.identity-chip').forEach(c=>c.classList.remove('selected'));
+  selectedIdentities=[];
+  document.getElementById('signatories').scrollIntoView({behavior:'smooth'});
+}
+
+// ─── MINDMAP ───
+let mmScale=1,mmOX=0,mmOY=0,mmDragging=false,mmLast={x:0,y:0};
+let mmInited=false;
+let mmResizeTimer=null;
+
+const mmNodesBase={
+  zh:[
+    {id:'root',x:0,y:0,label:'开放的未来',sub:'核心宣言',color:'#8b2a2a',r:44},
+    {id:'n1',x:-200,y:-140,label:'技术',sub:'人的延伸',color:'#5a6e8a',r:34},
+    {id:'n2',x:200,y:-140,label:'开放',sub:'实践',color:'#5a6e8a',r:34},
+    {id:'n3',x:-200,y:140,label:'协作',sub:'跨越角色',color:'#5a6e8a',r:34},
+    {id:'n4',x:200,y:140,label:'未来',sub:'共同创造',color:'#5a6e8a',r:34},
+    {id:'n5',x:-340,y:-80,label:'代码',color:'#7a8a5a',r:24},
+    {id:'n6',x:-340,y:-180,label:'设计',color:'#7a8a5a',r:24},
+    {id:'n7',x:340,y:-80,label:'知识',color:'#7a8a5a',r:24},
+    {id:'n8',x:340,y:-200,label:'自由',color:'#7a8a5a',r:24},
+    {id:'n9',x:-340,y:80,label:'开发者',color:'#8a7a5a',r:24},
+    {id:'n10',x:-340,y:180,label:'设计师',color:'#8a7a5a',r:24},
+    {id:'n11',x:-260,y:260,label:'用户',color:'#8a7a5a',r:24},
+    {id:'n12',x:340,y:80,label:'决策',color:'#8a7a5a',r:24},
+    {id:'n13',x:340,y:190,label:'可能性',color:'#8a7a5a',r:24}
+  ],
+  en:[
+    {id:'root',x:0,y:0,label:'Open Futures',sub:'Core Manifesto',color:'#8b2a2a',r:44},
+    {id:'n1',x:-200,y:-140,label:'Technology',sub:'as extension',color:'#5a6e8a',r:34},
+    {id:'n2',x:200,y:-140,label:'Openness',sub:'in practice',color:'#5a6e8a',r:34},
+    {id:'n3',x:-200,y:140,label:'Collaboration',sub:'across roles',color:'#5a6e8a',r:34},
+    {id:'n4',x:200,y:140,label:'Future',sub:'co-creation',color:'#5a6e8a',r:34},
+    {id:'n5',x:-340,y:-80,label:'Code',color:'#7a8a5a',r:24},
+    {id:'n6',x:-340,y:-180,label:'Design',color:'#7a8a5a',r:24},
+    {id:'n7',x:340,y:-80,label:'Knowledge',color:'#7a8a5a',r:24},
+    {id:'n8',x:340,y:-200,label:'Freedom',color:'#7a8a5a',r:24},
+    {id:'n9',x:-340,y:80,label:'Developers',color:'#8a7a5a',r:24},
+    {id:'n10',x:-340,y:180,label:'Designers',color:'#8a7a5a',r:24},
+    {id:'n11',x:-260,y:260,label:'Users',color:'#8a7a5a',r:24},
+    {id:'n12',x:340,y:80,label:'Decisions',color:'#8a7a5a',r:24},
+    {id:'n13',x:340,y:190,label:'Possibility',color:'#8a7a5a',r:24}
+  ],
+  fr:[
+    {id:'root',x:0,y:0,label:'Futurs Ouverts',sub:'Cœur du Manifeste',color:'#8b2a2a',r:44},
+    {id:'n1',x:-200,y:-140,label:'Technologie',sub:'extension',color:'#5a6e8a',r:34},
+    {id:'n2',x:200,y:-140,label:'Ouverture',sub:'en pratique',color:'#5a6e8a',r:34},
+    {id:'n3',x:-200,y:140,label:'Collaboration',sub:'au-delà',color:'#5a6e8a',r:34},
+    {id:'n4',x:200,y:140,label:'Avenir',sub:'co-création',color:'#5a6e8a',r:34},
+    {id:'n5',x:-340,y:-80,label:'Code',color:'#7a8a5a',r:24},
+    {id:'n6',x:-340,y:-180,label:'Design',color:'#7a8a5a',r:24},
+    {id:'n7',x:340,y:-80,label:'Savoir',color:'#7a8a5a',r:24},
+    {id:'n8',x:340,y:-200,label:'Liberté',color:'#7a8a5a',r:24},
+    {id:'n9',x:-340,y:80,label:'Développeurs',color:'#8a7a5a',r:24},
+    {id:'n10',x:-340,y:180,label:'Designers',color:'#8a7a5a',r:24},
+    {id:'n11',x:-260,y:260,label:'Utilisateurs',color:'#8a7a5a',r:24},
+    {id:'n12',x:340,y:80,label:'Décisions',color:'#8a7a5a',r:24},
+    {id:'n13',x:340,y:190,label:'Possibilité',color:'#8a7a5a',r:24}
+  ]
+};
+
+let mmNodes=mmNodesBase[currentLang]||mmNodesBase.en;
+const mmEdges=[
+  ['root','n1'],['root','n2'],['root','n3'],['root','n4'],
+  ['n1','n5'],['n1','n6'],['n2','n7'],['n2','n8'],
+  ['n3','n9'],['n3','n10'],['n3','n11'],['n4','n12'],['n4','n13']
+];
+
+function updateMindmapLabels(){
+  mmNodes=mmNodesBase[currentLang]||mmNodesBase.en;
+  if(mmInited)drawMindmap();
+}
+
+function resizeMindmapCanvas(){
+  const svg=document.getElementById('mm-svg');
+  if(svg){
+    svg.width.baseVal.value=svg.clientWidth;
+    svg.height.baseVal.value=svg.clientHeight;
+    drawMindmap();
+  }
+}
+
+window.addEventListener('resize',()=>{
+  if(document.getElementById('page2').style.display==='block'){
+    clearTimeout(mmResizeTimer);
+    mmResizeTimer=setTimeout(resizeMindmapCanvas,300);
+  }
+});
+
+function initMindmap(){
+  if(mmInited)return;
+  mmInited=true;
+  const wrap=document.querySelector('.mindmap-wrapper');
+  mmScale=1;
+  mmOX=wrap.clientWidth/2;
+  mmOY=wrap.clientHeight/2;
+  drawMindmap();
+  
+  const svg=document.getElementById('mm-svg');
+  svg.width.baseVal.value=wrap.clientWidth;
+  svg.height.baseVal.value=wrap.clientHeight;
+  
+  svg.addEventListener('mousedown',e=>{mmDragging=true;mmLast={x:e.clientX,y:e.clientY};e.preventDefault()});
+  window.addEventListener('mousemove',e=>{
+    if(!mmDragging)return;
+    mmOX+=e.clientX-mmLast.x;mmOY+=e.clientY-mmLast.y;
+    mmLast={x:e.clientX,y:e.clientY};drawMindmap();
+  });
+  window.addEventListener('mouseup',()=>{mmDragging=false});
+  svg.addEventListener('wheel',e=>{
+    e.preventDefault();
+    const delta=e.deltaY>0?0.9:1.1;
+    mmScale=Math.max(0.4,Math.min(2.5,mmScale*delta));
+    drawMindmap();
+  },{passive:false});
+  
+  let lastTouch=null;
+  svg.addEventListener('touchstart',e=>{if(e.touches.length===1){mmDragging=true;lastTouch={x:e.touches[0].clientX,y:e.touches[0].clientY}}},{passive:true});
+  svg.addEventListener('touchmove',e=>{
+    if(!mmDragging||e.touches.length!==1)return;
+    mmOX+=e.touches[0].clientX-lastTouch.x;mmOY+=e.touches[0].clientY-lastTouch.y;
+    lastTouch={x:e.touches[0].clientX,y:e.touches[0].clientY};drawMindmap();
+  },{passive:true});
+  svg.addEventListener('touchend',()=>{mmDragging=false});
+
+  // Listen to panel transition to keep mindmap centered during slide
+  const panel=document.getElementById('commentsPanel');
+  panel.addEventListener('transitionend',()=>{
+    resizeMindmapCanvas();
+  });
+}
+
+// Recenter immediately using current mindmap-wrapper dimensions
+function recenterMindmapInstant(){
+  const wrap=document.querySelector('.mindmap-wrapper');
+  // getBoundingClientRect gives the real current size, even mid-transition
+  // We want the size AFTER the transition — trigger it and then update each frame
+  // Use a short RAF loop that tracks wrapper width during the CSS transition
+  const panelTransitionDuration=300; // matches CSS 0.3s
+  const start=performance.now();
+  function tick(now){
+    const rect=wrap.getBoundingClientRect();
+    mmOX=rect.width/2;
+    mmOY=rect.height/2;
+    drawMindmap();
+    if(now-start < panelTransitionDuration+20){
+      requestAnimationFrame(tick);
+    }
+  }
+  requestAnimationFrame(tick);
+}
+
+function nodePos(n){return{x:mmOX+n.x*mmScale,y:mmOY+n.y*mmScale}}
+
+function drawMindmap(){
+  const svg=document.getElementById('mm-svg');
+  let html='';
+  // edges
+  mmEdges.forEach(([a,b])=>{
+    const na=mmNodes.find(n=>n.id===a),nb=mmNodes.find(n=>n.id===b);
+    const pa=nodePos(na),pb=nodePos(nb);
+    const mx=(pa.x+pb.x)/2,my=(pa.y+pb.y)/2-20;
+    html+=`<path d="M${pa.x} ${pa.y} Q${mx} ${my} ${pb.x} ${pb.y}" fill="none" stroke="rgba(200,168,122,0.45)" stroke-width="${1*mmScale}" stroke-dasharray="${mmScale<0.7?'4,4':'none'}"/>`;
+  });
+  // nodes
+  mmNodes.forEach(n=>{
+    const p=nodePos(n);
+    const r=n.r*mmScale;
+    html+=`<g class="mm-node" style="cursor:pointer" onclick="selectNode('${n.id}')">
+      <circle cx="${p.x}" cy="${p.y}" r="${r}" fill="${n.color}" fill-opacity="0.12" stroke="${n.color}" stroke-width="${n.id==='root'?2:1}"/>
+      <text x="${p.x}" y="${p.y-(n.sub?6:0)*mmScale}" text-anchor="middle" dominant-baseline="central" font-size="${Math.max(10,12*mmScale)}px" font-weight="${n.id==='root'?'700':'500'}" fill="${n.color}">${n.label}</text>
+      ${n.sub?`<text x="${p.x}" y="${p.y+10*mmScale}" text-anchor="middle" dominant-baseline="central" font-size="${Math.max(8,9*mmScale)}px" fill="${n.color}" fill-opacity="0.7">${n.sub}</text>`:''}
+    </g>`;
+  });
+  svg.innerHTML=html;
+}
+
+function mmZoom(f){mmScale=Math.max(0.4,Math.min(2.5,mmScale*f));drawMindmap()}
+function mmReset(){
+  mmScale=1;
+  recenterMindmapInstant();
+}
+
+function selectNode(id){
+  const n=mmNodes.find(x=>x.id===id);
+  if(n){
+    const langText={zh:'评论',en:'Comment on',fr:'Commenter sur'}[currentLang]||'Comment on';
+    document.getElementById('quickComment').placeholder=`${langText} "${n.label}"...`;
+  }
+}
+
+// ─── COMMENTS ───
+// Helper function to generate random comments
+function generateRandomComments() {
+  const firstNames = ['Alex', 'Jordan', 'Casey', 'Morgan', 'Riley', 'Ashley', 'Taylor', 'Quinn', '李明', '王芳', '张琳', '陈浩', 'Emma', 'Liam', 'Sophia', 'Lucas', 'Yuki', 'Sofia', 'Marco', 'Elena'];
+  const tags = ['developer', 'designer', 'researcher', 'user', 'member'];
+  const colors = ['#5a6e8a', '#8b6a4a', '#5a8a5a', '#8a7a5a', '#8b2a2a', '#6b5b4a', '#7a8a5a'];
+  const badges = ['insight', 'question', 'critique', 'connection', ''];
+  const times = ['2h ago', '3h ago', '5h ago', '1h ago', '4h ago', '6h ago', 'just now'];
+  const samples = [
+    'The third pillar resonates deeply — I\'ve seen too many products built in complete isolation from their users.',
+    'Is there a tension between "openness" and "security"? I think this is worth exploring more explicitly.',
+    '这里的"三位一体"概念很有意思，联想到Conway定律——组织架构决定系统结构。',
+    'Completely agree with the vision. The future needs more voices like these in tech.',
+    'How do we balance openness with maintaining design integrity? Great question.',
+    '开放的本质是信任。我们需要更多这样的讨论。',
+    'This connects deeply with participatory design principles. Love it!'
+  ];
+  
+  const comments = [];
+  for (let i = 0; i < 5; i++) {
+    comments.push({
+      author: firstNames[Math.floor(Math.random() * firstNames.length)],
+      tag: tags[Math.floor(Math.random() * tags.length)],
+      color: colors[Math.floor(Math.random() * colors.length)],
+      text: samples[Math.floor(Math.random() * samples.length)],
+      time: times[Math.floor(Math.random() * times.length)],
+      badge: badges[Math.floor(Math.random() * badges.length)] || ''
+    });
+  }
+  return comments;
+}
+
+const initialComments = generateRandomComments();
+let comments = [...initialComments];
+
+function renderComments(){
+  const list=document.getElementById('commentsList');
+  list.innerHTML='';
+  comments.forEach(c=>{
+    const div=document.createElement('div');
+    div.className='comment-item';
+    const tagText=i18n[currentLang][c.tag.toLowerCase()]||c.tag;
+    let badgeText='';
+    if(c.badge){
+      badgeText=i18n[currentLang][c.badge.toLowerCase()]||c.badge;
+    }
+    div.innerHTML=`<div class="comment-avatar" style="background:${c.color}">${c.author.slice(0,1)}</div>
+    <div class="comment-body">
+      <div style="display:flex;align-items:center;gap:4px;margin-bottom:3px">
+        <span class="comment-author">${c.author}</span>
+        <span class="comment-tag">${tagText}</span>
+        <span style="font-size:10px;color:var(--muted);margin-left:auto;background:var(--light);padding:2px 6px;border-radius:4px">${badgeText||''}</span>
+      </div>
+      <div class="comment-text">${c.text}</div>
+      <div class="comment-time">${c.time}</div>
+    </div>`;
+    list.appendChild(div);
+  });
+}
+renderComments();
+
+// ─── COMMENT OVERLAY ───
+let selectedTag='';
+function openCommentOverlay(){
+  const q=document.getElementById('quickComment').value;
+  document.getElementById('commentText').value=q||'';
+  document.getElementById('commentOverlay').classList.add('show');
+}
+function closeComment(){document.getElementById('commentOverlay').classList.remove('show')}
+function toggleTag(el,tag){
+  document.querySelectorAll('.comment-tag-btn').forEach(b=>b.classList.remove('selected'));
+  if(selectedTag===tag){selectedTag=''}else{el.classList.add('selected');selectedTag=tag};
+}
+function submitComment(){
+  const text=document.getElementById('commentText').value.trim();
+  if(!text)return;
+  comments.unshift({author:'You',tag:'member',color:'#8b2a2a',text,time:'just now',badge:selectedTag});
+  renderComments();
+  closeComment();
+  document.getElementById('quickComment').value='';
+  document.getElementById('commentText').value='';
+  selectedTag='';
+  document.querySelectorAll('.comment-tag-btn').forEach(b=>b.classList.remove('selected'));
+}
+
+// 初始化界面为英文
+//setLang('en');
+
+// Close overlays on bg click
+document.getElementById('signOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeSign()});
+document.getElementById('commentOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeComment()});
+
+// ─── TEXTAREA AUTO-RESIZE ───
+function autoResizeTextarea(textarea){
+  textarea.style.height='auto';
+  const scrollHeight=textarea.scrollHeight;
+  textarea.style.height=Math.min(scrollHeight,100)+'px';
+}
+
+function handleCommentKeydown(event){
+  if(event.ctrlKey && event.key==='Enter'){
+    openCommentOverlay();
+  }
+}
+</script>
+</body>
+</html>
