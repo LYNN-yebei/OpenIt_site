@@ -114,11 +114,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);o
 .signatories{border-top:1px solid var(--light);padding:4rem 2rem 8rem;background:var(--white)}
 .sig-header{text-align:center;margin-bottom:3rem}
 .sig-header h4{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;font-style:italic;color:var(--muted)}
-.sig-count{font-size:0.85rem;color:var(--muted);margin-top:0.5rem}
-.sig-grid{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:center;max-width:900px;margin:0 auto}
-.sig-item{font-family:'Crimson Pro',serif;font-size:1.05rem;font-style:italic;color:var(--ink);position:relative;padding-left:1rem}
-.sig-item::before{content:'—';position:absolute;left:0;color:var(--warm)}
-.sig-identity{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--warm);margin-left:0.5rem;vertical-align:middle}
+/* sig-count removed */
+.sig-grid{display:flex;flex-direction:column;align-items:center;gap:1.8rem;max-width:600px;margin:0 auto}
+.sig-item{display:flex;flex-direction:column;align-items:center;gap:0.25rem;text-align:center;padding:0}
+.sig-item::before{display:none}
+.sig-name{font-family:'Crimson Pro',serif;font-size:1.1rem;font-style:italic;color:var(--ink)}
+.sig-identity{display:block;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--warm);margin-left:0}
 
 /* ─── PAGE 2: IDEAS ─── */
 #page2{display:none;height:100vh;background:#f8f5f0;overflow:hidden}
@@ -413,7 +414,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);o
   <div class="signatories" id="signatories">
     <div class="sig-header">
       <h4 data-i18n="sigTitle">Those who have signed</h4>
-      <p class="sig-count" id="sigCount">47 signatories</p>
     </div>
     <div class="sig-grid" id="sigGrid"></div>
   </div>
@@ -553,6 +553,9 @@ function setLang(lang){
   if(postBtn && t['postBtn']) postBtn.textContent=t['postBtn'];
   // Update mindmap with new language
   updateMindmapLabels();
+  // Re-render signatories and comments so identity/tag labels update
+  renderSigs();
+  renderComments();
 }
 
 // ─── LAYOUT BREAKPOINTS ───
@@ -807,54 +810,153 @@ resizeCanvas();
 requestAnimationFrame(t=>drawHero(t));
 
 // ─── SIGNATORIES ───
-const initialSigs=[
-  {name:'林美玲',identity:'designer'},{name:'Marcus Webb',identity:'developer'},
-  {name:'田中悠',identity:'user'},{name:'Sofia Martínez',identity:'researcher'},
-  {name:'陈建国',identity:'developer'},{name:'Léa Dupont',identity:'designer'},
-  {name:'김민준',identity:'user'},{name:'Ravi Sharma',identity:'developer'},
-  {name:'王芳',identity:'designer'},{name:'Ivan Petrov',identity:'researcher'},
-  {name:'Amara Diallo',identity:'user'},{name:'张明',identity:'developer'},
-  {name:'Björn Larsson',identity:'other'},{name:'Fatima Al-Hassan',identity:'designer'},
-  {name:'Lucas Oliveira',identity:'user'}
-];
+// ─── SUPABASE CONFIG ───
+// 使用 Legacy anon key（Settings → API Keys → Legacy anon, service_role API keys → anon public）
+const SUPABASE_URL = 'https://ufleqyxmqqmlmzflyvwk.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_4U8-kapSkemfIuAxI5scLQ_MyR_Iyel';
+const TABLE = 'signatures';
+
+const supabaseHeaders = {
+  'Content-Type'  : 'application/json',
+  'apikey'        : SUPABASE_KEY,
+  'Authorization' : `Bearer ${SUPABASE_KEY}`
+};
+
+// Identity keys stored in DB are always English lowercase
+// Display is translated via i18n using the key directly
+const IDENTITY_KEYS = ['developer','designer','user','researcher','other'];
+
+function translateIdentity(identity){
+  // identity can be: text[] array from DB e.g. ["designer","developer"]
+  // or a plain string "designer" or comma-joined "designer,developer"
+  let keys = [];
+  if(Array.isArray(identity)){
+    keys = identity;
+  } else if(typeof identity === 'string'){
+    keys = identity.split(',');
+  }
+  return keys
+    .map(k => i18n[currentLang][(k||'').trim().toLowerCase()] || (k||'').trim())
+    .filter(Boolean)
+    .join(' / ') || (i18n[currentLang]['other'] || 'other');
+}
+
+// ─── RENDER SIGNATORIES ───
+// signatories array: [{id, name, identity, created_at}] ordered by created_at asc
+let signatories = [];
 
 function renderSigs(){
-  const grid=document.getElementById('sigGrid');
-  const count=document.getElementById('sigCount');
-  grid.innerHTML='';
-  signatories.forEach(s=>{
-    const el=document.createElement('div');
-    el.className='sig-item';
-    const identities=s.identity.split('/').map(id=>i18n[currentLang][id.toLowerCase()]||id).join('/');
-    el.innerHTML=`${s.name}<span class="sig-identity">${identities}</span>`;
+  const grid = document.getElementById('sigGrid');
+  grid.innerHTML = '';
+  if(signatories.length === 0){
+    const empty = document.createElement('div');
+    empty.className = 'sig-empty';
+    // Simple placeholder — no i18n key needed, will just show empty on first load
+    empty.textContent = '';
+    grid.appendChild(empty);
+    return;
+  }
+  // Display in creation order (oldest first = index 0)
+  signatories.forEach(s => {
+    const el = document.createElement('div');
+    el.className = 'sig-item';
+    const displayIdentity = translateIdentity(s.identity || 'other');
+    el.innerHTML = `<span class="sig-name">${s.name}</span><span class="sig-identity">${displayIdentity}</span>`;
     grid.appendChild(el);
   });
-  count.textContent=`${signatories.length} signatories`;
 }
 
-let signatories=[...initialSigs];
-renderSigs();
+// ─── FETCH FROM SUPABASE ───
+async function fetchSignatories(){
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/${TABLE}?select=*&order=created_at.asc`,
+      { headers: supabaseHeaders }
+    );
+    if(!res.ok){
+      const errBody = await res.text();
+      throw new Error(`Fetch failed: ${res.status} ${errBody}`);
+    }
+    const data = await res.json();
+    signatories = data;
+    renderSigs();
+  } catch(err){
+    console.error('Supabase fetch error:', err);
+  }
+}
+
+async function insertSignatory(name, email, identityArr){
+  // identityArr is already an array of English keys e.g. ['designer','developer']
+  const payload = { name, identity: identityArr };
+  if(email) payload.email = email;
+  const res = await fetch(
+    `${SUPABASE_URL}/rest/v1/${TABLE}`,
+    {
+      method: 'POST',
+      headers: { ...supabaseHeaders, 'Prefer': 'return=representation' },
+      body: JSON.stringify(payload)
+    }
+  );
+  if(!res.ok){
+    const err = await res.text();
+    throw new Error(`Insert failed: ${res.status} ${err}`);
+  }
+  return await res.json();
+}
+
+// Load signatories on page init
+fetchSignatories();
 
 // ─── SIGN OVERLAY ───
-let selectedIdentities=[];
-function openSign(){document.getElementById('signOverlay').classList.add('show')}
-function closeSign(){document.getElementById('signOverlay').classList.remove('show')}
-function toggleIdentity(el,id){
+let selectedIdentities = [];
+function openSign(){ document.getElementById('signOverlay').classList.add('show') }
+function closeSign(){ document.getElementById('signOverlay').classList.remove('show') }
+function toggleIdentity(el, id){
+  // id is always the English key (from data-identity on the chip button)
   el.classList.toggle('selected');
-  if(selectedIdentities.includes(id))selectedIdentities=selectedIdentities.filter(x=>x!==id);
-  else selectedIdentities.push(id);
+  if(selectedIdentities.includes(id)){
+    selectedIdentities = selectedIdentities.filter(x => x !== id);
+  } else {
+    selectedIdentities.push(id);
+  }
 }
-function submitSign(){
-  const name=document.getElementById('signName').value.trim();
-  if(!name){document.getElementById('signName').focus();return;}
-  signatories.push({name,identity:selectedIdentities.join('/')||'other'});
-  renderSigs();
-  closeSign();
-  document.getElementById('signName').value='';
-  document.getElementById('signEmail').value='';
-  document.querySelectorAll('.identity-chip').forEach(c=>c.classList.remove('selected'));
-  selectedIdentities=[];
-  document.getElementById('signatories').scrollIntoView({behavior:'smooth'});
+
+async function submitSign(){
+  const name  = document.getElementById('signName').value.trim();
+  const email = document.getElementById('signEmail').value.trim();
+  if(!name){ document.getElementById('signName').focus(); return; }
+
+  // Pass identity as array of English keys (matches text[] column in DB)
+  const identityArr = selectedIdentities.length > 0
+    ? [...selectedIdentities]
+    : ['other'];
+
+  const btn = document.querySelector('#signOverlay .submit-btn');
+  const origText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = '…';
+
+  try {
+    const rows = await insertSignatory(name, email, identityArr);
+    if(rows && rows.length > 0){
+      signatories.push(rows[0]);
+    } else {
+      signatories.push({ name, identity: identityArr, created_at: new Date().toISOString() });
+    }
+    renderSigs();
+    closeSign();
+    document.getElementById('signName').value  = '';
+    document.getElementById('signEmail').value = '';
+    document.querySelectorAll('.identity-chip').forEach(c => c.classList.remove('selected'));
+    selectedIdentities = [];
+    document.getElementById('signatories').scrollIntoView({ behavior: 'smooth' });
+  } catch(err){
+    console.error('Sign error:', err);
+    alert('Something went wrong. Please try again.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = origText;
+  }
 }
 
 // ─── MINDMAP ───
